@@ -1,7 +1,7 @@
 <div align="center">
   <img src="logo/logo.png" alt="Xeno.JS Shared Logo" width="140" />
 
-  <h1>@xeno-js/shared</h1>
+  <h1>Xeno.Js Shared</h1>
 
   <p><strong>Domain primitives and application contracts for TypeScript.</strong></p>
 
@@ -147,8 +147,12 @@ boundaries explicit.
 ```ts
 import { AggregateRoot } from '@xeno-js/shared'
 
-class UserId {
+class UserId extends UniqueId<'UserId'> {
   // ...
+}
+
+interface UserProps {
+  name: string
 }
 
 type UserEvent =
@@ -161,7 +165,7 @@ type UserEvent =
       name: string
     }
 
-class User extends AggregateRoot<UserEvent> {
+class User extends AggregateRoot<UserProps, UserEvent, UserId> {
   private name = ''
 
   public rename(name: string): void {
@@ -174,7 +178,10 @@ class User extends AggregateRoot<UserEvent> {
     })
   }
 
-  protected apply(event: IDomainEvent<UserEvent>, isNew: boolean): void {
+  protected apply(
+    event: IDomainEvent<UserEvent, UserId>,
+    isNew: boolean,
+  ): void {
     switch (event.eventType) {
       case 'UserRenamed':
         this.name = event.payload.name
@@ -210,14 +217,34 @@ primitives required to model and track domain events.
 by an aggregate.
 
 ```ts
-export interface IDomainEvent<
-  TPayload = unknown,
-  TValueObject extends object = object,
-> {
-  readonly aggregateId: TValueObject
+export interface IDomainEvent<TPayload = unknown, TId extends string = string> {
+  /**
+   * @description The unique identifier of the aggregate that triggered the domain event.
+   */
+  readonly aggregateId: UniqueId<TId>
+  /**
+   * @description The type of the aggregate that triggered the domain event.
+   */
+  readonly aggregateType: string
+  /**
+   * @description The type of the domain event.
+   */
   readonly eventType: string
+  /**
+   * @description The version of the domain event.
+   */
   readonly version: number
+  /**
+   * @description The destination of the domain event.
+   */
+  readonly destination?: string
+  /**
+   * @description The timestamp when the domain event occurred.
+   */
   readonly occurredAt: Date
+  /**
+   * @description The payload of the domain event, containing the specific data related to the event.
+   */
   readonly payload: TPayload
 }
 ```
@@ -248,6 +275,10 @@ interface EmailProps {
 }
 
 class Email extends ValueObject<EmailProps> {
+  private constructor(props: EmailProps) {
+    super(props)
+  }
+
   public static create(value: string): Email {
     return new Email({ value })
   }
@@ -398,27 +429,6 @@ blocks**.
 
 ---
 
-# Infrastructure adapters
-
-`@xeno-js/shared` also exports a limited set of reusable infrastructure
-components, including integrations and adapters for areas such as:
-
-- HTTP clients
-- Supabase authentication
-- caching
-- storage
-- validation
-- mapping
-- factories.
-
-These are exported as reusable building blocks; they do not define the
-architecture of the application.
-
-For applications using `@xeno-js/core`, infrastructure can be composed through
-the application architecture rather than becoming part of the domain model.
-
----
-
 # Framework independent by design
 
 `@xeno-js/shared` does not define an HTTP application lifecycle.
@@ -494,23 +504,6 @@ your application
 your transport / infrastructure
     hosts and connects the system
 ```
-
----
-
-# What `@xeno-js/shared` is not
-
-`@xeno-js/shared` is not:
-
-- an HTTP framework
-- an application server
-- an ORM
-- an event bus
-- an event store
-- a complete event-sourcing framework
-- a replacement for your transport framework.
-
-It provides the primitives and contracts that let those concerns remain
-separated from the domain model.
 
 ---
 

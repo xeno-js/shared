@@ -33,7 +33,7 @@ export interface TracingContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly spanId: Optional<string>
+  readonly spanId?: Optional<string>
   /** An optional identifier for the parent span in distributed tracing, which can be used to establish a hierarchy of spans and track the flow of requests across multiple services in a microservices architecture.
    *
    * @author Xeno
@@ -41,7 +41,7 @@ export interface TracingContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly parentSpanId: Optional<string>
+  readonly parentSpanId?: Optional<string>
   /**
    * @description The referer header of the request.
    *

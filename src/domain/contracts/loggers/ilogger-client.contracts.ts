@@ -16,12 +16,11 @@ export interface ILoggerClient {
    * @param message The message to be logged.
    * @param context An optional dictionary containing additional context for the log message.
    * @param error An optional unknown object associated with the log message.
-  
-   * 
+   *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js 
+   * @link https://github.com/xeno-js/xeno-js
    */
   track<T>(level: LogLevel, message: string, context: Optional<T>, error: Optional<unknown>): void
 }

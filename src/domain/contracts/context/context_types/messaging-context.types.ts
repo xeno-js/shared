@@ -16,7 +16,7 @@ export interface MessageSequence {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly sequenceId: Optional<string>
+  readonly sequenceId?: Optional<string>
   /** @description The position of the message within the sequence, which can be used to determine the order of messages in a sequence.
    *
    * @author Xeno
@@ -24,7 +24,7 @@ export interface MessageSequence {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly position: Optional<number>
+  readonly position?: Optional<number>
   /** @description The total number of messages in the sequence, which can be used to determine the size of the sequence.
    *
    * @author Xeno
@@ -32,7 +32,7 @@ export interface MessageSequence {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly size: Optional<number>
+  readonly size?: Optional<number>
 }
 
 /**
@@ -51,7 +51,7 @@ export interface MessagingContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly returnAddress: Optional<string>
+  readonly returnAddress?: Optional<string>
   /** @description The expiration time for the message, which can be used to determine when the message should be considered expired and no longer processed.
    *
    * @author Xeno
@@ -59,7 +59,7 @@ export interface MessagingContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly expiration: Optional<number>
+  readonly expiration?: Optional<number>
   /** @description The sequence information for the message, which can be used to manage the order and grouping of messages in a sequence.
    *
    * @author Xeno
@@ -67,5 +67,5 @@ export interface MessagingContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly sequence: Optional<MessageSequence>
+  readonly sequence?: Optional<MessageSequence>
 }

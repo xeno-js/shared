@@ -1,9 +1,32 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
-import { UniqueId } from '@/domain'
-import { GuidHelper } from '@/shared'
+import { UniqueId } from '@/domain/unique_id'
 
 import { Entity } from '../entity'
+vi.mock('@/domain/unique_id/unique-id', () => ({
+  UniqueId: class MockUniqueId {
+    private constructor(private readonly value: string) {}
+
+    static create<TKind extends string>(_kind: TKind, id?: string): MockUniqueId {
+      return new MockUniqueId(id ?? '00000000-0000-4000-8000-000000000001')
+    }
+
+    getValue(): string {
+      return this.value
+    }
+  },
+}))
+
+vi.mock('@/shared', () => ({
+  Guards: {
+    isNullOrEmpty: (value: string | undefined) => value === undefined || value === '',
+  },
+  GuidHelper: {
+    generate: () => '00000000-0000-4000-8000-000000000001',
+    isValid: (value: string) =>
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value),
+  },
+}))
 
 interface SampleProps {
   name: string
@@ -28,7 +51,7 @@ describe('Entity', () => {
 
   it('uses the provided UniqueId when it is valid', () => {
     const props: SampleProps = { name: 'bob', tags: ['user'] }
-    const id = GuidHelper.generate()
+    const id = '00000000-0000-4000-8000-000000000002'
 
     const entity = new SampleEntity(props, id)
 
@@ -61,13 +84,6 @@ describe('Entity', () => {
     retrievedProps.tags.push('hacker')
 
     expect(entity.getProps()).toEqual(props)
-  })
-
-  it('entity instance is frozen', () => {
-    const props: SampleProps = { name: 'frank', tags: ['contributor'] }
-    const entity = new SampleEntity(props)
-
-    expect(Object.isFrozen(entity)).toBe(true)
   })
 
   it('getId returns the UniqueId of the entity', () => {

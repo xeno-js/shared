@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { Guid } from '@/shared'
 import { Guards, GuidHelper } from '@/shared'
+
+const __typeSymbol = Symbol('UniqueIdBrand')
 
 /**
  * A class representing a unique identifier (UUID v4) for entities in the domain.
@@ -11,7 +14,8 @@ import { Guards, GuidHelper } from '@/shared'
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-export class UniqueId {
+export class UniqueId<TKind extends string = string> {
+  readonly [__typeSymbol]?: TKind
   /**
    * Private constructor to prevent direct instantiation. Use the static method `create` to generate a new unique identifier.
    * @param _value The string representation of the unique identifier (UUID v4).
@@ -30,17 +34,16 @@ export class UniqueId {
   /**
    * Static factory method to create a new UniqueId instance with a generated UUID v4.
    * @returns A new instance of UniqueId with a generated UUID v4.
-  
-   * 
+   *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js 
+   * @link https://github.com/xeno-js/xeno-js
    */
-  public static create(id?: string): UniqueId {
+  public static create<TKind extends string>(_kind: TKind, id?: string): UniqueId<TKind> {
     const uniqueId =
       !Guards.isNullOrEmpty(id) && GuidHelper.isValid(id) ? id : GuidHelper.generate()
-    return new UniqueId(uniqueId)
+    return new UniqueId<TKind>(uniqueId)
   }
 
   /**
@@ -82,7 +85,7 @@ export class UniqueId {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  public equals(other: UniqueId): boolean {
+  public equals(other: UniqueId<TKind>): boolean {
     if (!(other instanceof UniqueId)) {
       return false
     }

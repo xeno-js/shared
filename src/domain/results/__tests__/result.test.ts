@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { Result } from '@/domain'
+import { Result } from '@/domain/results'
 
 describe('Result', () => {
   describe('ok', () => {

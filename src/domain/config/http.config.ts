@@ -1,155 +1,52 @@
-import type { HttpHeaders, Optional } from '@/shared'
+import type { Optional } from '@/shared'
+
+import type { IHttpClient, IServiceResilience, IServiceScope } from '../contracts'
+import type { XenoRegistry } from '../registries'
 
 /**
- * @description Agnostic contract used to execute HTTP calls independently
- * from concrete transport libraries (fetch, axios, undici, etc.),
+ * @description HttpCoreConfig is an interface that defines the configuration options for the core HTTP functionality of the application. It includes two properties: 'http' of type HttpConfig, which specifies the configuration for the HTTP client, and 'resilience' of type ResilienceConfig, which provides the settings for implementing resilience strategies such as retries, circuit breakers, and timeouts. This interface allows for a centralized configuration of both HTTP and resilience features in the application.
  *
  * @author Xeno
  * @version 1.0.0
  * @since 2025-09-30
  * @link https://github.com/xeno-js/xeno-js
  */
-export interface HttpClientConfig {
-  /** @description Optional default headers to include in every request made by the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  defaultHeaders: Optional<HttpHeaders>
-  /** @description Optional base URL to prepend to all request URLs made by the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  baseURL: Optional<string>
-  /** @description Optional timeout in milliseconds for all requests made by the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  timeoutMs: Optional<number>
-
-  /** @description Optional keep-alive configuration for the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  keepAlive: Optional<boolean>
-
-  /** @description Optional maximum number of sockets to be used by the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  maxSockets: Optional<number>
-
+export interface HttpCoreConfig<TRegistry extends XenoRegistry = XenoRegistry> {
   /**
-   * @description Optional maximum number of redirects to follow for the HTTP client.
+   * @description The configuration options for the HTTP clients.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  maxRedirects: Optional<number>
-
-  /**
-   * @description Optional flag to enable or disable automatic decompression of response bodies.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  decompress: Optional<boolean>
-
-  /**
-   * @description Optional flag to enable or disable sending credentials (cookies, authorization headers, or TLS client certificates) with cross-origin requests.
-   */
-  withCredentials: Optional<boolean>
-
-  /**
-   * @description Optional proxy configuration for the HTTP client.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  proxy: ProxyConfig | false
+  clients: HttpRegistrationEntry<TRegistry>[]
 }
 
 /**
- * @description Configuration interface for HTTP client settings, defining parameters such as timeouts, headers, and proxy configurations.
- *
- * @author Xeno
- * @version 1.0.0
- * @since 2025-09-30
- * @link https://github.com/xeno-js/xeno-js
+ * @description The configuration options for the HTTP client, including name, the client instance and an optional resilience service.
  */
-export interface ProxyConfig {
+export interface HttpRegistrationEntry<TRegistry extends XenoRegistry = XenoRegistry> {
   /**
-   * @description The hostname or IP address of the proxy server.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
+   * @description The name of the HTTP client.
+   * @type string
    */
-  host: string
+  readonly name?: string
   /**
-   * @description The port number of the proxy server.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
+   * @description The HTTP client instance.
+   * @type IHttpClient
    */
-  port: number
+  readonly client: (scope: IServiceScope<TRegistry>) => IHttpClient
   /**
-   * @description Optional authentication credentials for the proxy server.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
+   * @description Optional resilience service instance for the HTTP client.
+   * @type Optional<IServiceResilience>
    */
-  auth?: {
-    /**
-     * @description The username for the proxy server.
-     *
-     * @author Xeno
-     * @version 1.0.0
-     * @since 2025-09-30
-     * @link https://github.com/xeno-js/xeno-js
-     */
-    username: string
-    /**
-     * @description The password for the proxy server.
-     *
-     * @author Xeno
-     * @version 1.0.0
-     * @since 2025-09-30
-     * @link https://github.com/xeno-js/xeno-js
-     */
-    password: string
-  }
-  /**
-   * @description The protocol to use for the proxy server (e.g., 'http', 'https').
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
+  readonly resilience?: Optional<(scope: IServiceScope<TRegistry>) => IServiceResilience>
+}
+
+export interface HttpConfig<TRegistry extends XenoRegistry = XenoRegistry> {
+  /** The HTTP configuration clients to register
+   * @default []
    */
-  protocol?: string
+  clients: HttpRegistrationEntry<TRegistry> | HttpRegistrationEntry<TRegistry>[]
 }

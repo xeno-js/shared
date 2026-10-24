@@ -10,6 +10,7 @@ import type {
 } from '../types/index'
 import { DateHelper } from './date.utils'
 import { Guards } from './guards.utils'
+import { StringHelper } from './string.utils'
 
 /**
  * @description This module provides utility functions for handling HTTP-related tasks, such as normalizing HTTP headers. It includes a single function, `normalizeHeaders`, which takes an input of unknown type and returns an object with normalized header values. The function ensures that all header values are converted to strings, and if a header value is an array, it joins the elements into a single string separated by commas. This utility is useful for ensuring consistent header formats when working with various HTTP client libraries.
@@ -188,5 +189,80 @@ export const HttpHelper = Object.freeze({
       },
       data: errorPayload,
     }
+  },
+  /**
+   * @description Parse cookies from a cookie header
+   * @param cookieHeader The cookie header to parse
+   * @returns A dictionary of cookies
+   */
+  parseCookies(cookieHeader: Optional<string>): Dictionary<string> {
+    if (!Guards.isDefined(cookieHeader) || Guards.isNullOrEmpty(cookieHeader)) return {}
+
+    const cookies: Dictionary<string> = {}
+    for (const rawCookie of cookieHeader.split(';')) {
+      const separatorIndex = rawCookie.indexOf('=')
+
+      if (separatorIndex === -1) {
+        const name = rawCookie.trim()
+        if (!Guards.isNullOrEmpty(name)) cookies[name] = ''
+        continue
+      }
+
+      const name = rawCookie.slice(0, separatorIndex).trim()
+      if (Guards.isNullOrEmpty(name)) continue
+      const value = rawCookie.slice(separatorIndex + 1).trim()
+
+      try {
+        cookies[name] = decodeURIComponent(value)
+      } catch {
+        cookies[name] = value
+      }
+    }
+    return cookies
+  },
+  /**
+   * @description Parse a URL string and return a URL object.
+   * @param url The URL string to parse.
+   * @param fallbackHost The host to use if the URL string is not valid.
+   * @returns The URL object.
+   */
+  parseSafeUrl(url: string, fallbackHost = 'http://localhost'): URL {
+    try {
+      return new URL(url)
+    } catch {
+      return new URL(url, fallbackHost)
+    }
+  },
+  /**
+   * @description Parse the body of a request.
+   * @param method The HTTP method of the request.
+   * @param rawBody The raw body of the request.
+   * @returns The parsed body of the request.
+   */
+  parseBody(method: Optional<string>, rawBody: unknown): Optional<BodyInit> {
+    if (
+      !Guards.isDefined(method) ||
+      !['POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()) ||
+      !Guards.isDefined(rawBody)
+    ) {
+      return undefined
+    }
+
+    if (
+      Guards.isString(rawBody) ||
+      rawBody instanceof Blob ||
+      rawBody instanceof ArrayBuffer ||
+      ArrayBuffer.isView(rawBody) ||
+      rawBody instanceof URLSearchParams ||
+      rawBody instanceof FormData
+    ) {
+      return rawBody as BodyInit
+    }
+
+    if (Guards.isObject(rawBody)) {
+      return StringHelper.safeStringify(rawBody)
+    }
+
+    return String(rawBody)
   },
 } as const)

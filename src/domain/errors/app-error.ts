@@ -174,6 +174,26 @@ export class AppError extends Error {
   }
 
   /**
+   * Creates an AppError instance representing an internal server error.
+   * @param name - The name of the error, typically the class name or context where the error occurred.
+   * @returns An AppError instance representing the internal server error.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  public static internalServerError(name: string, err: unknown): AppError {
+    return new AppError({
+      code: ERROR_CODES.SYSTEM_ERROR,
+      message: ERROR_CODE_MESSAGES[ERROR_CODES.SYSTEM_ERROR],
+      status: STATUS_CODES.INTERNAL_SERVER_ERROR,
+      name,
+      cause: err,
+    })
+  }
+
+  /**
    * Utility method to check if an AbortSignal has been triggered and throw an AppError if it has.
    * @param signal - The AbortSignal to check for abortion.
    * @param name - The name of the error, typically the class name or context where the error occurred.

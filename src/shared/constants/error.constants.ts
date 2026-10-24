@@ -140,6 +140,12 @@ export const ERROR_CODES = Object.freeze({
   NOT_ALLOWED: 'METHOD_NOT_ALLOWED',
 
   TOO_MANY_REQUESTS: 'TOO_MANY_REQUESTS',
+
+  REQUEST_TIMEOUT: 'REQUEST_TIMEOUT',
+
+  REDIRECT: 'REDIRECT',
+
+  NOT_MODIFIED: 'NOT_MODIFIED',
 } as const)
 
 /** @description Inferred union of every valid ERROR_CODES value.
@@ -194,6 +200,18 @@ export const STATUS_CODES = Object.freeze({
    */
   NO_CONTENT: 204,
 
+  /** @description
+   *
+   * @author Xeno
+   */
+  REDIRECT: 302,
+
+  /** @description The requested resource has not been modified since the last request.
+   *
+   * @author Xeno
+   */
+  NOT_MODIFIED: 304,
+
   // ── 4xx Client Errors ─────────────────────────────────────────────────────
 
   /** @description The request payload is malformed or contains invalid parameters.
@@ -233,6 +251,8 @@ export const STATUS_CODES = Object.freeze({
   NOT_FOUND: 404,
 
   NOT_ALLOWED: 405,
+
+  REQUEST_TIMEOUT: 408,
 
   /** @description The request conflicts with the current state of the resource.
    *
@@ -280,7 +300,6 @@ export const STATUS_CODES = Object.freeze({
    * @link https://github.com/xeno-js/xeno-js
    */
   INTERNAL_SERVER_ERROR: 500,
-
   /** @description A downstream dependency is temporarily unavailable.
    *
    * @author Xeno
@@ -326,4 +345,7 @@ export const ERROR_CODE_MESSAGES: Record<ErrorCode, string> = Object.freeze({
   [ERROR_CODES.PIPELINE_NOT_AVAILABLE]: 'errors.pipeline_not_available',
   [ERROR_CODES.NOT_ALLOWED]: 'errors.method_not_allowed',
   [ERROR_CODES.TOO_MANY_REQUESTS]: 'errors.too_many_requests',
+  [ERROR_CODES.REQUEST_TIMEOUT]: 'errors.request_timeout',
+  [ERROR_CODES.REDIRECT]: 'errors.redirect',
+  [ERROR_CODES.NOT_MODIFIED]: 'errors.not_modified',
 } as const)

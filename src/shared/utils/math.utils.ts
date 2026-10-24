@@ -91,7 +91,8 @@ export const MathHelper = Object.freeze({
    * @link https://github.com/xeno-js/xeno-js
    */
   toNumber(value: Optional<unknown>, fallback = 0): number {
-    if (!Guards.isDefined(value) || !Guards.isNumber(value)) return fallback
+    if (!Guards.isDefined(value)) return fallback
+    if (Guards.isNumber(value)) return value
     const num = Number(value)
     return isNaN(num) ? fallback : num
   },

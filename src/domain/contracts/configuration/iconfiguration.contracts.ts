@@ -24,6 +24,17 @@ export interface IConfigurationService {
   get(key: string, defaultValue?: string): Optional<string>
 
   /**
+   * Gets the environment name.
+   * @returns The environment name.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  getEnvironment(): string
+
+  /**
    * Retrieves a configuration value as a number. Returns the default value if the key is not present.
    * @param key - The configuration key to retrieve.
    * @param defaultValue - The default value to return if the key is not present.

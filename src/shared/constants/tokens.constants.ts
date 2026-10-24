@@ -1,212 +1,310 @@
 /**
- * @description This file defines the tokens used for dependency injection in the application.
- * Tokens are unique identifiers that are used to register and resolve dependencies in the container.
- * They can be symbols, strings, or classes, but using symbols is a common practice to avoid naming collisions.
+ * @description Tokens used by the framework.
  *
- * @author Xeno
- * @version 1.0.0
- * @since 2025-09-30
- * @link https://github.com/xeno-js/xeno-js
  */
 export const TOKENS = Object.freeze({
-  /** @description Token used to register and resolve the Extendend AuthService instance in the dependency injection container.
+  /** @description Token used to register and resolve the extended authentication service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  AUTH_SERVICE: 'AUTH_SERVICE',
-  /** @description Token used to register and resolve the BaseAuthService instance in the dependency injection container.
+  AUTH_SERVICE: 'authenticationService',
+  /** @description Token used to register and resolve the background worker instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  BASE_AUTH_SERVICE: 'BASE_AUTH_SERVICE',
-  /** @description Token used to register and resolve the InMemoryCache instance in the dependency injection container.
+  BACKGROUND_WORKER: 'worker',
+  /** @description Token used to register and resolve the base authentication service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CACHE: 'CACHE',
-  /** @description Token used to register and resolve the CacheKeyBuilder instance in the dependency injection container.
+  BASE_AUTH_SERVICE: 'baseAuthenticationService',
+  /** @description Token used to register and resolve the cache instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CACHE_KEY_BUILDER: 'CACHE_KEY_BUILDER',
-  /** @description Token used to register and resolve command pipeline behaviors in the dependency injection container.
+  CACHE: 'cache',
+  /** @description Token used to register and resolve the cache key builder instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  COMMAND_PIPELINES_BEHAVIOR: 'COMMAND_PIPELINES_BEHAVIOR',
-  /** @description Token used to register and resolve the ConcurrencyService instance in the dependency injection container.
+  CACHE_KEY_BUILDER: 'cacheKeyBuilder',
+  /** @description Token used to register and resolve the command pipelines behavior instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CONCURRENCY_SERVICE: 'CONCURRENCY_SERVICE',
-  /** @description Token used to register and resolve the ConfigurationService instance in the dependency injection container.
+  COMMAND_PIPELINES_BEHAVIOR: 'commandPipelinesBehavior',
+  /** @description Token used to register and resolve the concurrency service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CONFIGURATION_SERVICE: 'CONFIGURATION_SERVICE',
-  /** @description Token used to register and resolve the ContextAccessor instance in the dependency injection container.
+  CONCURRENCY_SERVICE: 'concurrencyService',
+  /** @description Token used to register and resolve the configuration service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CONTEXT_ACCESSOR: 'CONTEXT_ACCESSOR',
-  /** @description Token used to register and resolve the CryptoService instance in the dependency injection container.
+  CONFIGURATION_SERVICE: 'configurationService',
+  /** @description Token used to register and resolve the context accessor instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CRYPTO_SERVICE: 'CRYPTO_SERVICE',
-  /** @description Token used to register and resolve the CsrfTokenService instance in the dependency injection container.
+  CONTEXT_ACCESSOR: 'contextAccessor',
+  /** @description Token used to register and resolve the CookieHAndler instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  CSRF_TOKEN_SERVICE: 'CSRF_TOKEN_SERVICE',
-  /** @description Token used to register and resolve the DbContext instance in the dependency injection container.
+  COOKIE_HANDLER: 'cookieHandler',
+  /** @description Token used to register and resolve the crypto service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  DB_CONTEXT: 'DB_CONTEXT',
-  /** @description Token used to register and resolve the IdentityAccessor instance in the dependency injection container.
+  CRYPTO_SERVICE: 'cryptoService',
+  /** @description Token used to register and resolve the csrf token service instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  IDENTITY_ACCESSOR: 'IDENTITY_ACCESSOR',
-  /** @description Token used to register and resolve the Logger instance in the dependency injection container.
+  CSRF_TOKEN_SERVICE: 'csrfTokenService',
+  /** @description Token used to register and resolve the db context instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  LOGGER: 'LOGGER',
-  /** @description Token used to register and resolve the Mediator instance in the dependency injection container.
+  DB_CONTEXT: 'dbContext',
+  /** @description Token used to register and resolve the Event Dispatcher instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  MEDIATOR: 'MEDIATOR',
-  /** @description Token used to register and resolve the NetworkContextFactory in the dependency injection container.
+  EVENT_DISPATCHER: 'eventDispatcher',
+  /** @description Token used to register and resolve the HttpAdapter instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  NETWORK_CONTEXT_ACCESSOR: 'NETWORK_CONTEXT_ACCESSOR',
-  /** @description Token used to register and resolve query pipeline behaviors in the dependency injection container.
+  HTTP_ADAPTER: 'httpAdapter',
+  /** @description Token used to register and resolve the HttpClientFactory instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  QUERY_PIPELINES_BEHAVIOR: 'QUERY_PIPELINES_BEHAVIOR',
-  /** @description Token used to register and resolve the RequestContext instance in the dependency injection container.
+  HTTP_CLIENT_FACTORY: 'httpClientFactory',
+  /** @description Token used to register and resolve the HttpDispatcher instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  REQUEST_CONTEXT: 'REQUEST_CONTEXT',
-  /** @description Token used to register and resolve the CompositeMiddleware in the dependency injection container.
+  HTTP_DISPATCHER: 'httpDispatcher',
+  /** @description Token used to register and resolve the HttpServer instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  MIDDLEWARE: 'MIDDLEWARE',
-  /** @description Token used to register and resolve the IServiceResilience instance in the dependency injection container.
+  HTTP_SERVER: 'httpServer',
+  /** @description Token used to register and resolve the identity context accessor instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  RESILIENCE_CLIENT: 'RESILIENCE_CLIENT',
-  /** @description Token used to register and resolve the SchemaValidationStrategy instance in the dependency injection container.
+  IDENTITY_ACCESSOR: 'identityAccessor',
+  /** @description Token used to register and resolve the logger instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  SCHEMA_VALIDATION_STRATEGY: 'SCHEMA_VALIDATION_STRATEGY',
-  /** @description Token used to register and resolve the ServiceContainer instance in the dependency injection container.
+  LOGGER: 'logger',
+  /** @description Token used to register and resolve the mediator instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  SERVICE_CONTAINER: 'SERVICE_CONTAINER',
-  /** @description Token used to register and resolve the ServiceExtractor instance in the dependency injection container.
+  MEDIATOR: 'mediator',
+  /** @description Token used to register and resolve the middleware instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  SERVICE_EXTRACTOR: 'SERVICE_EXTRACTOR',
-  /** @description Token used to register and resolve the ServiceScopeAccessor in the dependency injection container.
+  MIDDLEWARE: 'middleware',
+  /** @description Token used to register and resolve the network context accessor instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  SERVICE_SCOPE_ACCESSOR: 'SERVICE_SCOPE_ACCESSOR',
-  /** @description Token used to register and resolve the UnitOfWork instance in the dependency injection container.
+  NETWORK_CONTEXT_ACCESSOR: 'networkContextAccessor',
+  /** @description Token used to register and resolve the query pipelines behavior instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  UNIT_OF_WORK: 'UNIT_OF_WORK',
-  /** @description Token used to register and resolve the ValidatorService instance in the dependency injection container.
+  QUERY_PIPELINES_BEHAVIOR: 'queryPipelinesBehavior',
+  /** @description Token used to register and resolve the request context instance in the dependency injection container.
    *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  VALIDATOR_SERVICE: 'VALIDATOR_SERVICE',
-} as const)
+  REQUEST_CONTEXT: 'requestContext',
+  /** @description Token used to register and resolve the service resilience instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  RESILIENCE_SERVICE: 'resilienceService',
+  /** @description Token used to register and resolve the route matcher instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  ROUTE_MATCHER: 'routeMatcher',
+  /** @description Token used to register and resolve the ServerOptionsFactory instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  SERVER_OPTIONS_FACTORY: 'serverOptionsFactory',
+  /** @description Token used to register and resolve the service container instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  SERVICE_CONTAINER: 'serviceContainer',
+  /** @description Token used to register and resolve the service extractor instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  SERVICE_EXTRACTOR: 'serviceExtractor',
+  /** @description Token used to register and resolve the ServiceProxy instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  SERVICE_PROXY: 'serviceProxy',
+  /** @description Token used to register and resolve the service scope accessor instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  SERVICE_SCOPE_ACCESSOR: 'serviceScopeAccessor',
+  /** @description Token used to register and resolve the TokenServiceExtractor instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  TOKEN_SERVICE_EXTRACTOR: 'tokenServiceExtractor',
+  /** @description Token used to register and resolve the TracingContextAccessor instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  TRACING_CONTEXT_ACCESSOR: 'tracingContextAccessor',
+  /** @description Token used to register and resolve the TransactionState instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  TRANSACTION_STATE: 'transactionState',
+  /** @description Token used to register and resolve the UnitOfWork service instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  UNIT_OF_WORK: 'unitOfWork',
+  /** @description Token used to register and resolve the user context factory instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  USER_CONTEXT_FACTORY: 'userContextFactory',
+  /** @description Token used to register and resolve the Validator service instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  VALIDATOR_SERVICE: 'validatorService',
+})

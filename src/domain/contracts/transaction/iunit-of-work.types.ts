@@ -1,5 +1,7 @@
 import type { Optional } from '@/shared'
 
+import type { AggregateRoot } from '../../aggregates'
+
 /**
  * @file unit-of-work.types.ts
  * @description This file contains the interface for the Unit of Work pattern.
@@ -9,7 +11,7 @@ import type { Optional } from '@/shared'
  * @since 2025-09-30
  * @link https://github.com/xeno-js/xeno-js
  */
-export interface IUnitOfWork {
+export interface IUnitOfWork<TTransaction = unknown> {
   /**
    * Executes a callback function within a transaction.
    * @param callback The callback function to execute.
@@ -21,5 +23,9 @@ export interface IUnitOfWork {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  runInTransaction<T>(callback: () => Promise<T>, signal: Optional<AbortSignal>): Promise<T>
+  runInTransaction<T, TProps, TEvent = unknown, TId extends string = string>(
+    callback: (tx: TTransaction) => Promise<T>,
+    aggregates?: AggregateRoot<TProps, TEvent, TId> | AggregateRoot<TProps, TEvent, TId>[],
+    signal?: Optional<AbortSignal>,
+  ): Promise<T>
 }

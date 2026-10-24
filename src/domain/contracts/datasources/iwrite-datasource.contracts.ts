@@ -24,7 +24,7 @@ export interface IWriteDataSource<TDto> extends IDisposable {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  findAll(ctx: UserContext, signal: Optional<AbortSignal>): Promise<TDto[]>
+  findAll(ctx?: Optional<UserContext>, signal?: Optional<AbortSignal>): Promise<TDto[]>
 
   /**
    * Executes a SQL query and returns the result as an array of objects.
@@ -41,8 +41,8 @@ export interface IWriteDataSource<TDto> extends IDisposable {
    */
   findById(
     id: string | number,
-    ctx: UserContext,
-    signal: Optional<AbortSignal>,
+    ctx?: Optional<UserContext>,
+    signal?: Optional<AbortSignal>,
   ): Promise<Optional<TDto>>
 
   /**
@@ -57,7 +57,7 @@ export interface IWriteDataSource<TDto> extends IDisposable {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  insert(dto: TDto, signal: Optional<AbortSignal>): Promise<void>
+  insert(dto: TDto, signal?: Optional<AbortSignal>): Promise<void>
 
   /**
    * @description Executes a SQL command that does not return any rows (e.g., INSERT, UPDATE, DELETE). This method takes a data transfer object (DTO) containing the data to be deleted from the database, a user context, and an optional AbortSignal for cancellation. It returns a promise that resolves when the command has been executed successfully. The implementation of this method is responsible for constructing the appropriate SQL command based on the provided DTO and handling any necessary data transformations before executing the command.
@@ -72,7 +72,7 @@ export interface IWriteDataSource<TDto> extends IDisposable {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  delete(dto: TDto, ctx: UserContext, signal: Optional<AbortSignal>): Promise<void>
+  delete(dto: TDto, ctx?: Optional<UserContext>, signal?: Optional<AbortSignal>): Promise<void>
 
   /**
    * @description Executes a SQL command that does not return any rows (e.g., INSERT, UPDATE, DELETE). This method takes a data transfer object (DTO) containing the data to be updated in the database, a user context, and an optional AbortSignal for cancellation. It returns a promise that resolves when the command has been executed successfully. The implementation of this method is responsible for constructing the appropriate SQL command based on the provided DTO and handling any necessary data transformations before executing the command.
@@ -90,7 +90,7 @@ export interface IWriteDataSource<TDto> extends IDisposable {
   update(
     id: string | number,
     dto: Partial<TDto>,
-    ctx: UserContext,
-    signal: Optional<AbortSignal>,
+    ctx?: Optional<UserContext>,
+    signal?: Optional<AbortSignal>,
   ): Promise<void>
 }
