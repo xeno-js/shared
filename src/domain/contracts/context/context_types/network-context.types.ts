@@ -1,4 +1,4 @@
-import type { ExtendedRequest, Guid, Optional } from '@/shared'
+import type { Guid, Optional } from '@/shared'
 
 /**
  * @description NetworkContext defines the structure for network-related information used in logging and monitoring. It includes a request ID for ensuring idempotency and a client IP address for audit logging purposes.
@@ -24,7 +24,7 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly clientIp: Optional<string>
+  readonly clientIp?: Optional<string>
   /** The user agent string of the client making the request, which can be used for audit logging and security purposes.
    *
    * @author Xeno
@@ -32,7 +32,7 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly userAgent: Optional<string>
+  readonly userAgent?: Optional<string>
   /** The format indicator for the request, which can be used for content negotiation and logging purposes.
    *
    * @author Xeno
@@ -40,7 +40,7 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly formatIndicator: Optional<string>
+  readonly formatIndicator?: Optional<string>
   /** The path of the request, which can be used for routing, logging, or applying specific middleware logic.
    *
    * @author Xeno
@@ -48,7 +48,7 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly path: Optional<string>
+  readonly path?: Optional<string>
 
   /**
    * @description The CSRF token for the request, which can be used for preventing cross-site request forgery attacks.
@@ -58,7 +58,7 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly csrf: Optional<string>
+  readonly csrf?: Optional<string>
 
   /**
    * @description The CSRF cookie for the request, which can be used for preventing cross-site request forgery attacks.
@@ -68,17 +68,9 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly csrfCookie: Optional<string>
+  readonly csrfCookie?: Optional<string>
 
-  /**
-   * @description The transport used for the request, which can be used for logging, monitoring, or applying specific middleware logic.
-   *
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js
-   */
-  readonly transport: Optional<{ req: ExtendedRequest; res: Response }>
+  readonly cookies?: Optional<string>
 
   /**
    * @description The origin of the request, which can be used for logging, monitoring, or applying specific middleware logic.
@@ -88,5 +80,5 @@ export interface NetworkContext {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly origin: Optional<string>
+  readonly origin?: Optional<string>
 }

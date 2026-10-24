@@ -226,10 +226,51 @@ export interface CookieOptions {
  * @since 2025-09-30
  * @link https://github.com/xeno-js/xeno-js
  */
-export interface ExtendedRequest extends Request {
+export interface XenoRequest extends Request {
   /**
    * @description The path of the request, which may be modified by middleware.
    * Example: '/api/v1/user'
    */
   path: string
+  /**
+   * @description The query parameters of the request.
+   * Example: { id: '123' }
+   */
+  query?: Dictionary<string>
+  /**
+   * @description The socket information of the request.
+   * Example: { remoteAddress: '192.168.1.1' }
+   */
+  socket?: {
+    /** @description The remote address of the client making the request. */
+    remoteAddress?: string
+  }
+}
+
+/**
+ * @description Represents an incoming request object that is used by the Xeno-js framework.
+ * This interface is used to parse incoming requests and extract the necessary information for processing.
+ */
+export interface XenoIncomingRequest {
+  /** @description The URL of the request. */
+  url: string
+  /** @description The HTTP method of the request. */
+  method: string
+  /** @description The headers of the request. */
+  headers: Headers
+  /** @description The body of the request. */
+  body?: unknown
+  /** @description The query parameters of the request. */
+  query?: Dictionary<string>
+  /** @description The path of the request. */
+  path: string
+  /** @description The socket information of the request. */
+  socket?: {
+    /** @description The remote address of the client making the request. */
+    remoteAddress?: string
+    /** @description The remote port of the client making the request. */
+    remotePort?: number
+  }
+  /** @description The abort signal of the request. */
+  signal?: AbortSignal
 }

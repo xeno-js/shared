@@ -1,3 +1,5 @@
+import type { Optional } from '@/shared'
+
 import type { ResultType } from '../../results/result.types'
 import type { IRequest } from './cqrs_types'
 
@@ -26,5 +28,5 @@ export interface IHandler<TRequest extends IRequest<TResponse>, TResponse> {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  handle(request: TRequest, signal: AbortSignal): Promise<ResultType<TResponse>>
+  handle(request: TRequest, signal?: Optional<AbortSignal>): Promise<ResultType<TResponse>>
 }

@@ -3,13 +3,12 @@
  *
  * @template TE - Il tipo dell'entità.
  * @template TDto - Il tipo del Data Transfer Object (DTO).
-
-   * 
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js 
-   */
+ *
+ * @author Xeno
+ * @version 1.0.0
+ * @since 2025-09-30
+ * @link https://github.com/xeno-js/xeno-js
+ */
 export interface IMapper<TE, TDto> {
   /**
    * Converts an entity of type TE to a Data Transfer Object (DTO) of type TDto.

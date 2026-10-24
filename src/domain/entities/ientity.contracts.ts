@@ -11,7 +11,7 @@ import type { UniqueId } from '../unique_id/unique-id'
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-export interface IEntity<T> {
+export interface IEntity<T, TId extends string = string> {
   /**
    * The unique identifier of the entity. This is a read-only property that should be assigned when the entity is created and should not change throughout the lifecycle of the entity.
    * @see UniqueId for more details on the unique identifier.
@@ -22,7 +22,7 @@ export interface IEntity<T> {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  readonly id: UniqueId
+  readonly id: UniqueId<TId>
 
   /** Retrieves the properties of the entity.
    *
@@ -42,4 +42,12 @@ export interface IEntity<T> {
    * @returns The unique identifier of the entity.
    */
   getId(): UniqueId
+
+  /** Sets the properties of the entity.
+   *
+   * @param props - The new properties of the entity.
+   * @throws An error if the entity is in an invalid state or if the properties cannot be set.
+   *
+   */
+  setProps(props: T): void
 }

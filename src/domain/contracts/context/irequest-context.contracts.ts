@@ -1,9 +1,13 @@
 import type { Optional } from '@/shared'
 
-import type { Identity, NetworkContext } from './context_types'
+import type { Identity, NetworkContext, TracingContext } from './context_types'
 
 export interface IBaseAccessor<TCtx>
-  extends IContextAccessor<TCtx>, IIdentityAccessor, INetworkContextAccessor {}
+  extends
+    IContextAccessor<TCtx>,
+    IIdentityAccessor,
+    INetworkContextAccessor,
+    ITracingContextAccessor {}
 
 /**
  * @description The IRequestContext interface is a contract that defines the structure and behavior of a request context within the application. It provides methods for executing asynchronous functions with the current user's identity context and retrieving the current user's identity information. This interface is essential for managing user identity and ensuring that identity-related data is properly propagated throughout the application.
@@ -69,4 +73,17 @@ export interface INetworkContextAccessor {
    * @link https://github.com/xeno-js/xeno-js
    */
   getNetworkContext(): Optional<NetworkContext>
+}
+
+export interface ITracingContextAccessor {
+  /**
+   * Retrieves the current tracing context, which can include information about the trace ID, span ID, and other tracing-related data. This method allows for synchronous access to tracing context-related data when needed.
+   * @returns An object representing the current tracing context, containing properties such as trace ID, span ID, and other tracing-related data. This information can be used for managing execution context and ensuring that tracing context-related data is accessible when needed.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  getTracingContext(): Optional<TracingContext>
 }

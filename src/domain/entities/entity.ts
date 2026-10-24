@@ -14,8 +14,8 @@ import type { IEntity } from './ientity.contracts'
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-export abstract class Entity<T> implements IEntity<T> {
-  public readonly id: UniqueId
+export abstract class Entity<T, TId extends string = string> implements IEntity<T, TId> {
+  public readonly id: UniqueId<TId>
 
   /**
    * The properties of the entity. This is a private property that holds the state of the entity. It should be accessed and modified through methods defined in the concrete entity classes to ensure encapsulation and maintain invariants.
@@ -26,7 +26,7 @@ export abstract class Entity<T> implements IEntity<T> {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  private readonly props: T
+  private props: T
 
   /**
    * Protected constructor to prevent direct instantiation. Concrete entity classes should extend this base class and call this constructor with the appropriate properties and an optional unique identifier.
@@ -42,12 +42,11 @@ export abstract class Entity<T> implements IEntity<T> {
    */
   protected constructor(props: T, id: Optional<string> = undefined) {
     if (Guards.isNullOrEmpty(id) || GuidHelper.isValid(id)) {
-      this.id = UniqueId.create(id)
+      this.id = UniqueId.create<TId>(this.constructor.name as TId, id)
     } else {
       throw new Error(`Invalid UniqueId provided: ${id}.`)
     }
     this.props = Object.freeze({ ...props })
-    Object.freeze(this)
   }
 
   public getProps(): T {
@@ -56,5 +55,9 @@ export abstract class Entity<T> implements IEntity<T> {
 
   public getId(): UniqueId {
     return this.id
+  }
+
+  public setProps(props: T): void {
+    this.props = Object.freeze({ ...props })
   }
 }

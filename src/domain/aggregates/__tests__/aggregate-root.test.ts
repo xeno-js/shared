@@ -1,29 +1,16 @@
 ﻿import { beforeEach, describe, expect, it } from 'vitest'
 
+import { GuidHelper } from '@/shared'
+
 import type { IDomainEvent } from '../../events'
-import { type IValueObject } from '../../value_objects/ivalue-object.contracts'
+import { UniqueId } from '../../unique_id'
 import { AggregateRoot } from '../aggregate-root'
 
-// Mock ValueObject for testing
-class MockId implements IValueObject<{ value: string }> {
-  constructor(private readonly _value: { value: string }) {}
-  getValue() {
-    return this._value
-  }
-  equals(other: IValueObject<{ value: string }>) {
-    return this.getValue().value === other.getValue().value
-  }
-  toString() {
-    return this._value.value
-  }
-}
-
-// Concrete implementation of AggregateRoot for testing
 interface TestEventPayload {
   foo: string
 }
 
-class TestAggregate extends AggregateRoot<TestEventPayload, { value: string }> {
+class TestAggregate extends AggregateRoot<{ test: boolean }, TestEventPayload, 'Test'> {
   public lastAppliedEvent: IDomainEvent<TestEventPayload> | null = null
   public state = ''
 
@@ -35,21 +22,26 @@ class TestAggregate extends AggregateRoot<TestEventPayload, { value: string }> {
   }
 
   public triggerTestEvent(foo: string) {
-    this.raise({ eventType: 'TestEvent', payload: { foo } })
+    this.raise({
+      eventType: 'TestEvent',
+      payload: { foo },
+      destination: 'test-create',
+      aggregateType: 'test',
+    })
   }
 }
 
 describe('AggregateRoot', () => {
-  let id: MockId
+  let id: UniqueId<'Test'>
   let aggregate: TestAggregate
 
   beforeEach(() => {
-    id = new MockId({ value: 'test-id' })
-    aggregate = new TestAggregate(id)
+    id = UniqueId.create<'Test'>('Test', 'test-id')
+    aggregate = new TestAggregate({ test: true }, id.toString())
   })
 
   it('should initialize with the correct ID and version 0', () => {
-    expect(aggregate.id.getValue()).toEqual({ value: 'test-id' })
+    expect(GuidHelper.isValid(aggregate.id.toString())).toBe(true)
     expect(aggregate.version).toBe(0)
   })
 
@@ -60,7 +52,7 @@ describe('AggregateRoot', () => {
     expect(uncommitted).toHaveLength(1)
     expect(uncommitted[0].eventType).toBe('TestEvent')
     expect(uncommitted[0].payload.foo).toBe('bar')
-    expect(uncommitted[0].aggregateId.getValue()).toEqual({ value: 'test-id' })
+    expect(GuidHelper.isValid(uncommitted[0].aggregateId.getValue())).toBe(true)
     expect(uncommitted[0].version).toBe(1)
     expect(aggregate.version).toBe(1)
   })
@@ -74,20 +66,24 @@ describe('AggregateRoot', () => {
   })
 
   it('should load from history and update version', () => {
-    const history: IDomainEvent<TestEventPayload, MockId>[] = [
+    const history: IDomainEvent<TestEventPayload, 'Test'>[] = [
       {
         eventType: 'TestEvent',
+        aggregateType: 'Test',
         payload: { foo: 'event1' },
         aggregateId: id,
         version: 1,
         occurredAt: new Date(),
+        destination: 'test',
       },
       {
         eventType: 'TestEvent',
+        aggregateType: 'Test',
         payload: { foo: 'event2' },
         aggregateId: id,
         version: 2,
         occurredAt: new Date(),
+        destination: 'test',
       },
     ]
 
@@ -99,13 +95,15 @@ describe('AggregateRoot', () => {
   })
 
   it('should not add events to uncommitted list when loading from history', () => {
-    const history: IDomainEvent<TestEventPayload, MockId>[] = [
+    const history: IDomainEvent<TestEventPayload, 'Test'>[] = [
       {
         eventType: 'TestEvent',
+        aggregateType: 'Test',
         payload: { foo: 'event1' },
         aggregateId: id,
         version: 1,
         occurredAt: new Date(),
+        destination: 'test',
       },
     ]
 

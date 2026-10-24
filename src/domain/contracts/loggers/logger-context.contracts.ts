@@ -14,7 +14,7 @@ export interface LoggerContext {
     requestId: Optional<string>
     path: Optional<string>
     origin: Optional<string>
-    clientIp: Optional<string> // Valuta se mascherarlo in base alle policy aziendali
+    clientIp: Optional<string>
   }
   tracing: {
     correlationId: Optional<string>

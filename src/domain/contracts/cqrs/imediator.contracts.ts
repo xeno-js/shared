@@ -1,3 +1,5 @@
+import type { Optional } from '@/shared'
+
 import type { ResultType } from '../../results/result.types'
 import type { ICommand } from './cqrs_types/icommand.types'
 import type { IQuery } from './cqrs_types/iquery.types'
@@ -24,7 +26,10 @@ export interface IMediator {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  send<TResponse>(request: ICommand<TResponse>, signal: AbortSignal): Promise<ResultType<TResponse>>
+  send<TResponse>(
+    request: ICommand<TResponse>,
+    signal?: Optional<AbortSignal>,
+  ): Promise<ResultType<TResponse>>
 
   /**
    * Executes a query and returns the result.
@@ -38,5 +43,8 @@ export interface IMediator {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js 
    */
-  query<TResponse>(request: IQuery<TResponse>, signal: AbortSignal): Promise<ResultType<TResponse>>
+  query<TResponse>(
+    request: IQuery<TResponse>,
+    signal?: Optional<AbortSignal>,
+  ): Promise<ResultType<TResponse>>
 }

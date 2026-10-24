@@ -96,4 +96,14 @@ export interface ICache {
    * @link https://github.com/xeno-js/xeno-js 
    */
   clear(): Promise<void>
+
+  /**
+   * Removes all entries from the cache that match the specified pattern. The pattern parameter is a string that can contain wildcard characters, such as "*" and "?". The method uses the pattern to match keys in the cache and removes all matching entries. This method can be used when there is a need to remove multiple entries from the cache based on a common pattern. For example, if the cache contains entries for different users, the pattern could be "user:*" to remove all entries related to users.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  removePattern(pattern: string): Promise<void>
 }

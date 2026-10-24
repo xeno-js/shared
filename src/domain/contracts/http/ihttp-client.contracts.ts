@@ -2,13 +2,12 @@ import type { HttpOptions, HttpRequest, HttpResponse, Optional } from '@/shared'
 
 /**
  * @description Agnostic contract used to execute HTTP calls independently from concrete transport libraries (fetch, axios, undici, etc.).
-
-   * 
-   * @author Xeno
-   * @version 1.0.0
-   * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js 
-   */
+ *
+ * @author Xeno
+ * @version 1.0.0
+ * @since 2025-09-30
+ * @link https://github.com/xeno-js/xeno-js
+ */
 export interface IHttpClient {
   /**
    * @description Executes an HTTP GET request to the specified URL with optional request options.
@@ -24,7 +23,7 @@ export interface IHttpClient {
    */
   get<TResponse = unknown>(
     url: string,
-    options: Optional<Omit<HttpRequest<never>, HttpOptions>>,
+    options?: Optional<Omit<HttpRequest<never>, HttpOptions>>,
   ): Promise<HttpResponse<TResponse>>
 
   /**
@@ -43,7 +42,7 @@ export interface IHttpClient {
   post<TResponse = unknown, TBody = unknown>(
     url: string,
     body: Optional<TBody>,
-    options: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
+    options?: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
   ): Promise<HttpResponse<TResponse>>
 
   /**
@@ -62,7 +61,7 @@ export interface IHttpClient {
   put<TResponse = unknown, TBody = unknown>(
     url: string,
     body: Optional<TBody>,
-    options: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
+    options?: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
   ): Promise<HttpResponse<TResponse>>
 
   /**
@@ -81,7 +80,7 @@ export interface IHttpClient {
   patch<TResponse = unknown, TBody = unknown>(
     url: string,
     body: Optional<TBody>,
-    options: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
+    options?: Optional<Omit<HttpRequest<TBody>, HttpOptions>>,
   ): Promise<HttpResponse<TResponse>>
 
   /**
@@ -98,6 +97,6 @@ export interface IHttpClient {
    */
   delete<TResponse = unknown>(
     url: string,
-    options: Optional<Omit<HttpRequest<never>, HttpOptions>>,
+    options?: Optional<Omit<HttpRequest<never>, HttpOptions>>,
   ): Promise<HttpResponse<TResponse>>
 }

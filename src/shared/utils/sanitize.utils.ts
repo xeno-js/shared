@@ -1,4 +1,4 @@
-import type { Optional } from '../types/index'
+import type { Dictionary, Optional } from '../types/index'
 import { Guards } from './guards.utils'
 
 const start = String.fromCharCode(0)
@@ -68,6 +68,24 @@ export const SanitizeHelper = Object.freeze({
       .map((item) => SanitizeHelper.stripControlChars(item, maxItemLength))
       .filter((item): item is string => Guards.isDefined(item))
 
+    return sanitized
+  },
+  sanitizeObject(obj: unknown): Dictionary {
+    if (!Guards.isObject(obj)) return {}
+    const sanitized: Dictionary = {}
+    const forbiddenKeys = new Set(['__proto__', 'constructor', 'prototype'])
+
+    for (const [key, value] of Object.entries(obj as Dictionary)) {
+      if (forbiddenKeys.has(key)) continue // Scarta chiavi pericolose
+
+      if (Guards.isString(value)) {
+        sanitized[key] = SanitizeHelper.stripControlChars(value) ?? ''
+      } else if (Guards.isObject(value) && !Guards.isArray(value)) {
+        sanitized[key] = SanitizeHelper.sanitizeObject(value)
+      } else {
+        sanitized[key] = value
+      }
+    }
     return sanitized
   },
 } as const)

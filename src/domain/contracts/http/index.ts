@@ -1,1 +1,8 @@
+export type * from './iadapter.contracts'
+export type * from './idispatcher.contracts'
 export type * from './ihttp-client.contracts'
+export type * from './ihttp-factory.contracts'
+export type * from './iroute-matcher-factory.contracts'
+export type * from './iroutes.contracts'
+export type * from './iserver.contracts'
+export type * from './iserver-options-factory.contracts'

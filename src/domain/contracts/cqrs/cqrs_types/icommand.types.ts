@@ -28,4 +28,12 @@ export interface ICommand<TResponse = unknown> extends IRequest<TResponse> {
    * @link https://github.com/xeno-js/xeno-js
    */
   readonly $type?: TResponse
+  /** @description An optional property to specify the cache options for the command, which can be used to control caching behavior in the pipeline.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  readonly cacheInvalidation?: { keys?: string[]; patterns?: string[] }
 }

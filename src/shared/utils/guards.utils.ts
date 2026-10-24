@@ -25,19 +25,18 @@ export const Guards = Object.freeze({
    * @link https://github.com/xeno-js/xeno-js 
    */
   isDefined<TValue>(value: Maybe<TValue>): value is TValue {
-    return value !== null && value !== undefined && value !== '' && !Number.isNaN(value)
+    return value !== null && value !== undefined && !Number.isNaN(value)
   },
 
   /**
    * @description Checks value is null, undefined, empty string, or false.
    * @param value Candidate value.
    * @returns True when value is null, undefined, empty string, or false.
-  
-   * 
+   *
    * @author Xeno
    * @version 1.0.0
    * @since 2025-09-30
-   * @link https://github.com/xeno-js/xeno-js 
+   * @link https://github.com/xeno-js/xeno-js
    */
   isNullOrEmpty<TValue>(value: Maybe<TValue>): value is null | undefined {
     return (

@@ -27,7 +27,7 @@ export interface Identity {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly userId: Optional<Guid>
+  readonly userId?: Optional<Guid>
 
   /** @description The email address of the user.
    *
@@ -36,9 +36,9 @@ export interface Identity {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly email: Optional<string>
+  readonly email?: Optional<string>
 
-  readonly name: Optional<string>
+  readonly name?: Optional<string>
 
   /** @description The tenant ID associated with the user.
    *
@@ -47,7 +47,7 @@ export interface Identity {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly tenantId: Optional<Guid>
+  readonly tenantId?: Optional<Guid>
 
   /** @description The roles assigned to the user, which can be used for authorization purposes.
    *
@@ -56,7 +56,7 @@ export interface Identity {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly roles: Optional<string[]>
+  readonly roles?: Optional<string[]>
 
   /** @description The permissions assigned to the user, which can be used for fine-grained authorization checks.
    *
@@ -65,5 +65,5 @@ export interface Identity {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  readonly permissions: Optional<string[]>
+  readonly permissions?: Optional<string[]>
 }

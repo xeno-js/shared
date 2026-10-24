@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { ValueObject } from '@/domain'
+import { ValueObject } from '../value-object'
 
 interface TestProps {
   name: string
@@ -47,6 +47,30 @@ describe('ValueObject', () => {
     const vo = new TestValueObject({ name: 'Alice', age: 30 })
     const nonVO = new TestValueObject(undefined as unknown as TestProps)
     expect(vo.equals(nonVO)).toBe(false)
+  })
+  it('equals returns false when the other value object returns an empty value', () => {
+    const vo = new TestValueObject({ name: 'Alice', age: 30 })
+    const emptyValueObject = {
+      getValue: () => undefined as unknown as TestProps,
+      equals: () => false,
+      toString: () => '',
+    }
+
+    expect(vo.equals(emptyValueObject)).toBe(false)
+  })
+
+  it('returns a copy of the properties', () => {
+    const vo = new TestValueObject({ name: 'Alice', age: 30 })
+    const props = vo.getValue()
+    props.name = 'Bob'
+
+    expect(vo.getValue()).toEqual({ name: 'Alice', age: 30 })
+  })
+
+  it('freezes the value object instance', () => {
+    const vo = new TestValueObject({ name: 'Alice', age: 30 })
+
+    expect(Object.isFrozen(vo)).toBe(true)
   })
 
   it('toString returns the string representation of the ValueObject', () => {

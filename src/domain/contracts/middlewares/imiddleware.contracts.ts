@@ -1,4 +1,4 @@
-import type { ExtendedRequest, ResponseDto } from '@/shared'
+import type { ResponseDto, XenoRequest } from '@/shared'
 
 /**
  * @description The IMiddleware interface defines the contract for middleware components that process incoming HTTP requests. Implementing classes must provide an execute method that takes an HttpRequest as input and returns a Promise of a ResponseDto, which can either be a successful response or an error response. This design allows for flexible middleware implementations that can perform various tasks such as authentication, logging, request transformation, or response generation.
@@ -22,9 +22,5 @@ export interface IMiddleware {
    * @since 2025-09-30
    * @link https://github.com/xeno-js/xeno-js
    */
-  execute<TResp, TReq extends ExtendedRequest, TRes extends Response>(
-    req: TReq,
-    res: TRes,
-    next: () => Promise<ResponseDto<TResp>>,
-  ): Promise<ResponseDto<TResp>>
+  execute<T>(req: XenoRequest, next: () => Promise<ResponseDto<T>>): Promise<ResponseDto<T>>
 }
