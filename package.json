@@ -19,21 +19,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./axios": {
-      "types": "./dist/axios.d.ts",
-      "import": "./dist/axios.js",
-      "require": "./dist/axios.cjs"
-    },
-    "./supabase": {
-      "types": "./dist/supabase.d.ts",
-      "import": "./dist/supabase.js",
-      "require": "./dist/supabase.cjs"
-    },
-    "./zod": {
-      "types": "./dist/zod.d.ts",
-      "import": "./dist/zod.js",
-      "require": "./dist/zod.cjs"
     }
   },
   "files": [
@@ -83,30 +68,12 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "peerDependencies": {
-    "@supabase/supabase-js": "^2.117.0",
-    "axios": "^1.20.0",
-    "zod": "^4.6.5"
-  },
-  "peerDependenciesMeta": {
-    "@supabase/supabase-js": {
-      "optional": true
-    },
-    "axios": {
-      "optional": true
-    },
-    "zod": {
-      "optional": false
-    }
-  },
   "devDependencies": {
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
     "@eslint/js": "^10.0.1",
-    "@supabase/supabase-js": "^2.117.0",
     "@types/pg": "^8.23.1",
     "@vitest/coverage-v8": "^5.0.1",
-    "axios": "^1.20.0",
     "conventional-changelog-angular": "^9.4.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog": "^8.1.3",
@@ -120,7 +87,6 @@
     "tsup": "^8.5.1",
     "typescript": "^5.8.0",
     "typescript-eslint": "^8.70.1",
-    "vitest": "^5.0.1",
-    "zod": "^4.6.5"
+    "vitest": "^5.0.1"
   }
 }
