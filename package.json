@@ -46,9 +46,9 @@
     "prepare": "husky",
     "changelog": "npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prepublishOnly": "npm run check && npm run build",
-    "release:patch": "npm version patch && npm run changelog && npm run prepublishOnly && npm publish --access public",
-    "release:minor": "npm version minor && npm run changelog && npm run prepublishOnly && npm publish --access public",
-    "release:major": "npm version major && npm run changelog && npm run prepublishOnly && npm publish --access public"
+    "release:patch": "npm version patch && npm run changelog && npm run prepublishOnly && npm publish",
+    "release:minor": "npm version minor && npm run changelog && npm run prepublishOnly && npm publish",
+    "release:major": "npm version major && npm run changelog && npm run prepublishOnly && npm publish"
   },
   "keywords": [
     "typescript",

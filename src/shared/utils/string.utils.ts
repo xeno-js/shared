@@ -160,4 +160,14 @@ export const StringHelper = Object.freeze({
     if (value.includes(separator)) return value.split(separator)[0].trim()
     return value
   },
+
+  safeStringifyObject(obj: object): Dictionary {
+    const serializedContext: Dictionary = {}
+    for (const [key, value] of Object.entries(obj)) {
+      if (Guards.isDefined(value)) {
+        serializedContext[key] = StringHelper.safeStringify(value)
+      }
+    }
+    return serializedContext
+  },
 } as const)
