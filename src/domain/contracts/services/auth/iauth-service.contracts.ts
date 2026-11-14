@@ -109,12 +109,12 @@ export interface ISuperAdminAuthService {
   /**
    * @description Lists all users registered in Supabase Auth (useful for an Excel-style table in the Dashboard).
    */
-  listUsers?(page?: number, perPage?: number): Promise<ResultType<AuthClaims[]>>
+  listUsers(page?: number, perPage?: number): Promise<ResultType<AuthClaims[]>>
 
   /**
    * @description Deletes or disables a user directly from Supabase Auth.
    */
-  deleteUser?(userId: string): Promise<ResultType<void>>
+  deleteUser(userId: string): Promise<ResultType<void>>
 
   /**
    * @description Retrieves a user by their ID.

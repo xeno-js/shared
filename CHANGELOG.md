@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/xeno-js/xeno-shared/compare/v4.3.0...v4.4.0) (2026-11-14)
+
+### Features
+
+- **auth:** adding superadmin contracts
+  ([bcadbde](https://github.com/xeno-js/xeno-shared/commit/bcadbde61949fed98b7d58c73d837f794c2f31cd))
+
 # [4.3.0](https://github.com/xeno-js/xeno-shared/compare/v4.2.0...v4.3.0) (2026-11-14)
 
 ### Features
