@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { ResultType } from '@/domain'
 import type { AuthClaims, Maybe, Optional, Provider, Session } from '@/shared'
 
@@ -82,6 +83,45 @@ export interface IAuthService {
    * @returns A promise that resolves to the session wit
    */
   exchangeCodeForSession(code: string): Promise<ResultType<Optional<Session>>>
+}
+
+/**
+ * @description ISuperAdminAuthService defines the contract for super admin authentication services.
+ * It provides methods to manage users, including updating identity, listing users, deleting users, and retrieving users by ID.
+ */
+export interface ISuperAdminAuthService {
+  /**
+   * @description Updates the metadata (roles, permissions, tenant_id) or other attributes of a specific user.
+   * @param userId The ID of the user to update.
+   * @param data The data to update for the user.
+   * @returns A promise that resolves when the update is complete.
+   */
+  updateIdentity(
+    userId: string,
+    data: {
+      app_metadata?: { roles?: string[]; permissions?: string[]; tenant_id?: Optional<string> }
+      user_metadata?: Record<string, unknown>
+      email?: string
+      password?: string
+    },
+  ): Promise<ResultType<void>>
+
+  /**
+   * @description Lists all users registered in Supabase Auth (useful for an Excel-style table in the Dashboard).
+   */
+  listUsers?(page?: number, perPage?: number): Promise<ResultType<AuthClaims[]>>
+
+  /**
+   * @description Deletes or disables a user directly from Supabase Auth.
+   */
+  deleteUser?(userId: string): Promise<ResultType<void>>
+
+  /**
+   * @description Retrieves a user by their ID.
+   * @param userId The ID of the user to retrieve.
+   * @returns A promise that resolves to the user's claims.
+   */
+  getUserById(userId: string): Promise<ResultType<AuthClaims>>
 }
 
 /**

@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/xeno-js/xeno-shared/compare/v4.2.0...v4.3.0) (2026-11-14)
+
+### Features
+
+- adding global superadmin roles
+  ([af798dc](https://github.com/xeno-js/xeno-shared/commit/af798dca20dea207a12c1c2f9d7a18f4a8c9ea8e))
+
 # [4.2.0](https://github.com/xeno-js/xeno-shared/compare/v4.1.0...v4.2.0) (2026-11-14)
 
 ### Features

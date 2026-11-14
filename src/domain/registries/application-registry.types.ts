@@ -35,6 +35,7 @@ import type {
   IServiceResilience,
   IServiceScopeAccessor,
   ISsrCookieHandler,
+  ISuperAdminAuthService,
   ITracingContextAccessor,
   ITransactionState,
   IUnitOfWork,
@@ -269,6 +270,14 @@ export interface ApplicationRegistry<T = unknown, Ttx = unknown> {
    * @link https://github.com/xeno-js/xeno-js
    */
   readonly serviceExtractor: IServiceExtractor<Request['headers'], Metadata>
+  /** @description Token used to register and resolve the ISuperAdminAuthService instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  readonly superadminAuthService: ISuperAdminAuthService
   /** @description Token used to register and resolve the TokenServiceExtractor instance in the dependency injection container.
    *
    * @author Xeno
