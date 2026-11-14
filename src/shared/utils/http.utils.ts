@@ -265,4 +265,36 @@ export const HttpHelper = Object.freeze({
 
     return String(rawBody)
   },
+
+  resolveFormatIndicator(
+    acceptHeader: Optional<string>,
+    contentTypeHeader: Optional<string>,
+  ): string {
+    const fromAccept = this.normalizeMediaType(acceptHeader, true)
+    if (Guards.isDefined(fromAccept)) return fromAccept
+
+    const fromContentType = this.normalizeMediaType(contentTypeHeader, false)
+    if (Guards.isDefined(fromContentType)) return fromContentType
+
+    return 'application/json'
+  },
+
+  normalizeMediaType(value: Optional<string>, fromAccept: boolean): Optional<string> {
+    if (Guards.isNullOrEmpty(value)) return undefined
+
+    const firstCandidate = value.split(',')[0]?.trim()
+    if (Guards.isNullOrEmpty(firstCandidate)) return undefined
+
+    const mediaType = firstCandidate.split(';')[0]?.trim().toLowerCase()
+    if (Guards.isNullOrEmpty(mediaType)) return undefined
+    if (fromAccept && mediaType === '*/*') return undefined
+
+    if (!this.isValidMediaType(mediaType)) return undefined
+
+    return mediaType
+  },
+
+  isValidMediaType(mediaType: string): boolean {
+    return /^[!#$%&'*+\-.^_`|~0-9a-z]+\/[!#$%&'*+\-.^_`|~0-9a-z]+$/.test(mediaType)
+  },
 } as const)

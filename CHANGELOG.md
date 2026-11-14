@@ -1,4 +1,9 @@
-# [4.0.0](https://github.com/xeno-js/xeno-shared/compare/v3.1.0...v4.0.0) (2026-10-24)
+# [4.1.0](https://github.com/xeno-js/xeno-shared/compare/v3.1.0...v4.1.0) (2026-11-13)
+
+### Features
+
+- add stringify object
+  ([dc036b5](https://github.com/xeno-js/xeno-shared/commit/dc036b5444b28387274e0b9b0f3566be3c5a84c6))
 
 # [3.1.0](https://github.com/xeno-js/xeno-shared/compare/v4.0.0...v3.1.0) (2026-10-08)
 
