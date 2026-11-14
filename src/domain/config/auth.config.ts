@@ -156,4 +156,9 @@ export interface AuthorizationOptions<TRegistry extends XenoRegistry = XenoRegis
   customAuthorizationStrategy?: Optional<
     (container: IServiceScope<TRegistry>) => IStrategy<IRequest>
   >[]
+
+  /**
+   * @description The superadmin roles that have elevated privileges and can bypass standard authorization checks. This can be a single role or an array of roles. Users with any of these roles will be granted access regardless of other authorization strategies.
+   */
+  superadmin?: string | string[]
 }

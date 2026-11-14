@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/xeno-js/xeno-shared/compare/v4.1.0...v4.2.0) (2026-11-14)
+
+### Features
+
+- **http-helper:** add parsing format indicator
+  ([ec92c28](https://github.com/xeno-js/xeno-shared/commit/ec92c287021c8c9e6f7376ba936c5284c16acee1))
+
 # [4.1.0](https://github.com/xeno-js/xeno-shared/compare/v3.1.0...v4.1.0) (2026-11-13)
 
 ### Features
