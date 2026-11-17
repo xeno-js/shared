@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/xeno-js/xeno-shared/compare/v4.4.0...v4.4.1) (2026-11-14)
+
+### Bug Fixes
+
+- **superadmin:** update contracts
+  ([cf890fd](https://github.com/xeno-js/xeno-shared/commit/cf890fd1911d52a37d11161ae3e26479ad8b1a4f))
+
 # [4.4.0](https://github.com/xeno-js/xeno-shared/compare/v4.3.0...v4.4.0) (2026-11-14)
 
 ### Features
