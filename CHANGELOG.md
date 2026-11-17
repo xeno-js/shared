@@ -1,3 +1,10 @@
+# [5.0.0](https://github.com/xeno-js/xeno-shared/compare/v4.4.1...v5.0.0) (2026-11-17)
+
+### Bug Fixes
+
+- **superadmin:** update auth service contracts
+  ([e42bd0d](https://github.com/xeno-js/xeno-shared/commit/e42bd0d28811db5c94039cb55f5399764effd47a))
+
 ## [4.4.1](https://github.com/xeno-js/xeno-shared/compare/v4.4.0...v4.4.1) (2026-11-14)
 
 ### Bug Fixes
