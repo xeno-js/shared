@@ -1,6 +1,29 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ResultType } from '@/domain'
-import type { AuthClaims, Maybe, Optional, Provider, Session } from '@/shared'
+import type {
+  AuthClaims,
+  Dictionary,
+  IPaginatedResult,
+  Maybe,
+  Optional,
+  Provider,
+  Session,
+} from '@/shared'
+
+export interface UpdateIdentityDto {
+  readonly email?: string
+  readonly password?: string
+  readonly emailConfirm?: boolean
+  readonly phoneConfirm?: boolean
+  readonly banDuration?: string
+  readonly appMetadata?: {
+    roles?: string[]
+    permissions?: string[]
+    tenant_id?: Optional<string>
+    [key: `custom_${string}`]: unknown
+  }
+  readonly userMetadata?: Record<string, unknown>
+}
 
 /**
  * @description IAuthService defines the contract for authentication services.
@@ -63,7 +86,15 @@ export interface IAuthService {
    * @param provider The provider to use for signing in the user.
    * @returns A promise that resolves to the URL for the specified provider.
    */
-  signInWithProvider(provider: Provider): Promise<ResultType<{ url: string }>>
+  signInWithProvider(
+    provider: Provider,
+    options?: {
+      redirectTo?: string
+      scopes?: string
+      queryParams?: Dictionary<string>
+      skipBrowserRedirect?: boolean
+    },
+  ): Promise<ResultType<{ url: string }>>
 
   /**
    * @description Gets the current session of the user.
@@ -73,16 +104,18 @@ export interface IAuthService {
 
   /**
    * @description Signs out the user.
+   * @param scope The scope of the sign-out operation ('global', 'local', or 'others').
    * @returns A promise that resolves when the user is signed out.
    */
-  signOut(): Promise<ResultType<void>>
+  signOut(scope?: 'global' | 'local' | 'others'): Promise<ResultType<void>>
 
   /**
    * @description Exchanges the code for a session.
    * @param code the code to exchange for a session
-   * @returns A promise that resolves to the session wit
+   * @param flowId The flow ID associated with the code exchange (optional).
+   * @returns A promise that resolves to the session with the exchanged code.
    */
-  exchangeCodeForSession(code: string): Promise<ResultType<Optional<Session>>>
+  exchangeCodeForSession(code: string, flowId?: string): Promise<ResultType<Optional<Session>>>
 }
 
 /**
@@ -96,25 +129,22 @@ export interface ISuperAdminAuthService {
    * @param data The data to update for the user.
    * @returns A promise that resolves when the update is complete.
    */
-  updateIdentity(
-    userId: string,
-    data: {
-      app_metadata?: { roles?: string[]; permissions?: string[]; tenant_id?: Optional<string> }
-      user_metadata?: Record<string, unknown>
-      email?: string
-      password?: string
-    },
-  ): Promise<ResultType<void>>
+  updateIdentity(userId: string, data: UpdateIdentityDto): Promise<ResultType<void>>
 
   /**
    * @description Lists all users registered in Supabase Auth (useful for an Excel-style table in the Dashboard).
+   * @param page The page number to retrieve (default is 1).
+   * @param perPage The number of users per page (default is 10).
+   * @returns A promise that resolves to a paginated result of user claims.
    */
-  listUsers(page?: number, perPage?: number): Promise<ResultType<AuthClaims[]>>
+  listUsers(page?: number, perPage?: number): Promise<ResultType<IPaginatedResult<AuthClaims>>>
 
   /**
    * @description Deletes or disables a user directly from Supabase Auth.
+   * @param softDelete Indicates whether to perform a soft delete (default is false).
+   * @returns A promise that resolves when the deletion is complete.
    */
-  deleteUser(userId: string): Promise<ResultType<void>>
+  deleteUser(userId: string, softDelete?: boolean): Promise<ResultType<void>>
 
   /**
    * @description Retrieves a user by their ID.
