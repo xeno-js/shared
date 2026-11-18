@@ -162,3 +162,19 @@ export interface ISuperAdminAuthService {
  * @link https://github.com/xeno-js/xeno-js
  */
 export interface IExtendendAuthService extends IBaseAuthService, IAuthService {}
+
+/**
+ * @description IClientAuthFactory defines the contract for a client authentication factory.
+ * It provides a method to retrieve instances of the requested type.
+ * @author Xeno
+ * @version 1.0.0
+ * @since 2025-09-30
+ * @link https://github.com/xeno-js/xeno-js
+ */
+export interface IClientAuthFactory {
+  /**
+   * @description Retrieves an instance of the requested type `T`.
+   * @returns An instance of type `T`.
+   */
+  get<T>(): T
+}

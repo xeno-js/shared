@@ -5,6 +5,7 @@ import type {
   IBackgroundWorker,
   IBaseAuthService,
   ICacheKeyBuilder,
+  IClientAuthFactory,
   ICommand,
   IConcurrencyService,
   IConfigurationService,
@@ -94,6 +95,14 @@ export interface ApplicationRegistry<T = unknown, Ttx = unknown> {
    * @link https://github.com/xeno-js/xeno-js
    */
   readonly httpClientFactory: IHttpClientFactory
+  /** @description Token used to register and resolve the ClientAuthFactory instance in the dependency injection container.
+   *
+   * @author Xeno
+   * @version 1.0.0
+   * @since 2025-09-30
+   * @link https://github.com/xeno-js/xeno-js
+   */
+  readonly clientAuthFactory: IClientAuthFactory
   /** @description Token used to register and resolve the CookieHandler instance in the dependency injection container.
    *
    * @author Xeno
