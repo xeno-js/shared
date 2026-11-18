@@ -176,5 +176,5 @@ export interface IClientAuthFactory {
    * @description Retrieves an instance of the requested type `T`.
    * @returns An instance of type `T`.
    */
-  get<T>(): T
+  get<T>(input?: unknown): T
 }

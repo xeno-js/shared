@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/xeno-js/xeno-shared/compare/v5.0.0...v5.1.0) (2026-11-18)
+
+### Features
+
+- adding client auth factory in registry
+  ([e08b4e6](https://github.com/xeno-js/xeno-shared/commit/e08b4e687fb11b5a1fbcfba5410e3bb2af253d82))
+
 # [5.0.0](https://github.com/xeno-js/xeno-shared/compare/v4.4.1...v5.0.0) (2026-11-17)
 
 ### Bug Fixes
