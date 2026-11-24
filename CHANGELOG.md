@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/xeno-js/xeno-shared/compare/v5.2.0...v5.3.0) (2026-11-24)
+
+### Features
+
+- adding identity enrichment strategy opts
+  ([f5ba328](https://github.com/xeno-js/xeno-shared/commit/f5ba32873d4e5f3ae87fc71a8af05824e0787668))
+
 # [5.2.0](https://github.com/xeno-js/xeno-shared/compare/v5.1.0...v5.2.0) (2026-11-18)
 
 ### Features
