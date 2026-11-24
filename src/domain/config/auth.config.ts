@@ -1,6 +1,7 @@
 import type { AuthPolicy, Dictionary, Optional } from '@/shared'
 
 import type {
+  Identity,
   IExtendendAuthService,
   IRequest,
   IServiceExtractor,
@@ -161,4 +162,14 @@ export interface AuthorizationOptions<TRegistry extends XenoRegistry = XenoRegis
    * @description The superadmin roles that have elevated privileges and can bypass standard authorization checks. This can be a single role or an array of roles. Users with any of these roles will be granted access regardless of other authorization strategies.
    */
   superadmin?: string | string[]
+}
+
+/**
+ * @description Configuration for identity enrichment. Strategies run before each command or query is handled, after authentication and before authorization.
+ */
+export interface IdentityEnrichmentOptions {
+  /**
+   * Global strategy applied to every command and query that has no intent-specific strategy. Defaults to a noop strategy that leaves the identity unchanged.
+   */
+  strategy?: Optional<IStrategy<Identity>>
 }

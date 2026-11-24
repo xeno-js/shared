@@ -1,4 +1,8 @@
-import type { AuthorizationOptions, IdempotencyOptions } from '@/domain/config'
+import type {
+  AuthorizationOptions,
+  IdempotencyOptions,
+  IdentityEnrichmentOptions,
+} from '@/domain/config'
 import type { XenoRegistry } from '@/domain/registries'
 import type { Optional } from '@/shared'
 
@@ -10,6 +14,9 @@ export interface IPipelineSetup<TRegistry extends XenoRegistry = XenoRegistry> {
 
   set idempotencyOpts(options: IdempotencyOptions)
   get idempotencyOpts(): Optional<IdempotencyOptions>
+
+  set identityEnrichmentOpts(options: IdentityEnrichmentOptions)
+  get identityEnrichmentOpts(): Optional<IdentityEnrichmentOptions>
 
   /**
    * Add a behavior to the pipeline that will be applied to all requests.

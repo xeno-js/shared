@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/xeno-js/xeno-shared/compare/v5.1.0...v5.2.0) (2026-11-18)
+
+### Features
+
+- adding an optional input to auth client factory
+  ([3c15527](https://github.com/xeno-js/xeno-shared/commit/3c155274ec144c19184034aa5e1ea7896be1e490))
+
 # [5.1.0](https://github.com/xeno-js/xeno-shared/compare/v5.0.0...v5.1.0) (2026-11-18)
 
 ### Features
